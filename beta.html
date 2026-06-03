@@ -3,115 +3,235 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Beta tester guide · Log Mc</title>
+<title>Log Mc — Join the Beta</title>
+<meta name="description" content="Log Mc — a simple work & rest assistant for Australian heavy-vehicle drivers. Join the public beta on TestFlight.">
 <style>
-  :root { color-scheme: light dark; }
-  * { box-sizing: border-box; }
-  body {
-    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    margin: 0; color: #1c1c1e; background: #fff;
+  :root{
+    --green:#18a05a; --green2:#2dc485; --green-d:#127a44;
+    --cream:#f3efe2; --ink:#15171c; --dim:#5d626c; --line:#e7e4d8;
+    --card:#ffffff; --bg:#fbfaf5;
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e7e7ea; background: #0e0f12; }
-    a { color: #6fb1ff; } .meta { color: #8d9099; }
-    hr { border-color: #26282e; } .card { background: #16181d; border-color: #24262c; }
-    .warn { background: #2a2113; border-color: #4a3a12; }
-    ol li::marker, .step b { color: #4fd08a; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--ink); background:var(--bg); -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  .wrap { max-width: 720px; margin: 0 auto; padding: 40px 22px 80px; }
-  h1 { font-size: 28px; letter-spacing: -0.02em; margin: 0 0 4px; }
-  h2 { font-size: 19px; letter-spacing: -0.01em; margin: 32px 0 8px; }
-  .meta { color: #6b6f76; font-size: 14px; margin: 0 0 8px; }
-  a { color: #0a66ff; }
-  hr { border: none; border-top: 1px solid #e6e6ea; margin: 24px 0; }
-  ul, ol { padding-left: 22px; } li { margin: 7px 0; }
-  .card { border: 1px solid #e6e6ea; border-radius: 14px; padding: 16px 18px; margin: 18px 0; background: #fafafb; }
-  .warn { border: 1px solid #f0e2b8; border-radius: 14px; padding: 14px 18px; margin: 18px 0; background: #fdf8e8; }
-  .lead { font-size: 17px; }
-  .step b { color: #18a05a; }
-  code { font-size: 13px; background: rgba(127,127,127,.14); padding: 1px 6px; border-radius: 6px; }
-  .cta-wrap { text-align: center; margin: 24px 0; }
-  .cta { display: inline-block; background: #18a05a; color: #fff !important; font-weight: 700;
-         padding: 15px 30px; border-radius: 12px; text-decoration: none; font-size: 17px; }
-  .cta:hover { background: #15904f; }
+  a{color:inherit;}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 22px;}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative; text-align:center; padding:64px 22px 40px; overflow:hidden;}
+  .hero::before{
+    content:""; position:absolute; inset:-40% -20% auto -20%; height:120%;
+    background:
+      radial-gradient(60% 50% at 30% 20%, rgba(45,196,133,.20), transparent 70%),
+      radial-gradient(50% 50% at 80% 10%, rgba(24,160,90,.16), transparent 70%),
+      linear-gradient(180deg,var(--cream),var(--bg) 70%);
+    background-size:200% 200%; animation:drift 16s ease-in-out infinite; z-index:-1;
+  }
+  @keyframes drift{0%,100%{background-position:0% 0%;}50%{background-position:100% 100%;}}
+  .badge{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--green-d); background:rgba(24,160,90,.12); border:1px solid rgba(24,160,90,.25);
+    padding:6px 14px; border-radius:100px; margin-bottom:22px;}
+  .applogo{width:118px; height:118px; border-radius:27px; box-shadow:0 18px 50px rgba(24,160,90,.28),0 4px 14px rgba(0,0,0,.12);
+    animation:floaty 5s ease-in-out infinite;}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(0);}50%{transform:translateY(-12px) rotate(-1.5deg);}}
+  h1{font-size:clamp(38px,7vw,64px); letter-spacing:-.03em; margin:22px 0 6px; line-height:1.02;}
+  .tag{font-size:clamp(17px,2.4vw,21px); color:var(--dim); max-width:560px; margin:0 auto 6px;}
+  .sub{font-size:14px; color:var(--dim); max-width:520px; margin:14px auto 0;}
+  .cta-row{margin:30px 0 6px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+  .btn{display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:17px; text-decoration:none;
+    padding:15px 30px; border-radius:14px; transition:transform .18s ease, box-shadow .18s ease, background .18s;}
+  .btn-primary{background:linear-gradient(135deg,var(--green2),var(--green)); color:#fff;
+    box-shadow:0 10px 26px rgba(24,160,90,.34);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 16px 34px rgba(24,160,90,.42);}
+  .btn-ghost{background:#fff; color:var(--ink); border:1px solid var(--line);}
+  .btn-ghost:hover{transform:translateY(-2px);}
+
+  /* ---------- Phone mockup ---------- */
+  .stage{display:flex; justify-content:center; margin:38px 0 8px;}
+  .phone{width:284px; border-radius:42px; padding:12px; background:linear-gradient(160deg,#2a2d34,#0c0d10);
+    box-shadow:0 40px 90px rgba(0,0,0,.34),0 8px 20px rgba(0,0,0,.2); animation:floaty 6s ease-in-out infinite;}
+  .screen{border-radius:32px; background:#0e0f12; padding:14px 13px 18px; color:#e7e7ea; position:relative; overflow:hidden;}
+  .notch{width:120px; height:24px; background:#000; border-radius:0 0 16px 16px; margin:0 auto 10px;}
+  .startpill{background:linear-gradient(135deg,#ffd27a,#f5b13a); color:#1a1205; font-weight:800; font-size:14px;
+    text-align:center; padding:13px; border-radius:16px; box-shadow:0 6px 18px rgba(245,177,58,.4);}
+  .pcard{background:#16181d; border:1px solid #24262c; border-radius:16px; padding:12px 13px; margin-top:11px;}
+  .plabel{font-size:8.5px; letter-spacing:.16em; color:#8d9099; font-weight:700;}
+  .pnow{display:flex; gap:9px; align-items:center; background:#211b0e; border:1px solid #4a3a12;
+    border-radius:12px; padding:10px; margin-top:8px;}
+  .pdot{width:22px; height:22px; border-radius:50%; background:#f5b13a33; color:#f5b13a; font-size:12px;
+    display:flex; align-items:center; justify-content:center; flex:none;}
+  .pnow b{font-size:11px;} .pnow span{font-size:9px; color:#aeb2bb; display:block;}
+  .prow{display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-top:1px solid #20222899; font-size:10.5px;}
+  .prow:first-of-type{border-top:none;}
+  .prow .l{color:#cdd0d6;} .prow .v{font-weight:700; font-variant-numeric:tabular-nums;}
+  .prow .v.g{color:#ffd27a;} .prow .v.ok{color:#4fd08a;}
+  .pgrouphead{font-size:8px; letter-spacing:.14em; color:#6a6e77; font-weight:700; margin:9px 0 2px;}
+
+  /* screenshot gallery */
+  .shots-section{padding:34px 0 8px;}
+  .gallery{display:flex; gap:22px; overflow-x:auto; scroll-snap-type:x mandatory;
+    padding:14px 24px 26px; scrollbar-width:none; justify-content:safe center;}
+  .gallery::-webkit-scrollbar{display:none;}
+  .frame{flex:none; scroll-snap-align:center; width:244px; border-radius:40px; padding:9px;
+    background:linear-gradient(160deg,#2a2d34,#0c0d10);
+    box-shadow:0 30px 70px rgba(0,0,0,.30),0 6px 16px rgba(0,0,0,.18);
+    transition:transform .25s ease;}
+  .frame:hover{transform:translateY(-6px);}
+  .frame img{width:100%; display:block; border-radius:31px;}
+
+  /* ---------- Sections ---------- */
+  section{padding:54px 0;}
+  .eyebrow{text-align:center; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--green-d); margin-bottom:8px;}
+  h2{text-align:center; font-size:clamp(26px,4vw,36px); letter-spacing:-.02em; margin-bottom:8px;}
+  .lead{text-align:center; color:var(--dim); max-width:560px; margin:0 auto 34px;}
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .feat{background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px;
+    transition:transform .2s ease, box-shadow .2s ease;}
+  .feat:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.07);}
+  .feat .ic{width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+    font-size:21px; background:rgba(24,160,90,.12); margin-bottom:12px;}
+  .feat h3{font-size:18px; margin-bottom:4px;} .feat p{color:var(--dim); font-size:15px;}
+
+  /* steps */
+  .steps{max-width:680px; margin:0 auto;}
+  .step{display:flex; gap:16px; align-items:flex-start; padding:16px; border-radius:16px;
+    background:var(--card); border:1px solid var(--line); margin-bottom:12px;}
+  .num{flex:none; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,var(--green2),var(--green));
+    color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .step h3{font-size:16px; margin-bottom:2px;} .step p{color:var(--dim); font-size:14.5px;}
+  .step .big{font-weight:600; color:var(--green-d);}
+
+  .warn{max-width:680px; margin:0 auto; background:#fdf8e8; border:1px solid #f0e2b8; border-radius:16px; padding:16px 20px; color:#5b4b16; font-size:15px;}
+  @media(prefers-color-scheme:dark){.warn{background:#211b0e; border-color:#4a3a12; color:#e8d9a8;}}
+
+  .cardbox{max-width:680px; margin:0 auto; background:var(--card); border:1px solid var(--line); border-radius:18px; padding:22px;}
+  .cardbox ul{padding-left:20px;} .cardbox li{margin:7px 0;}
+
+  footer{text-align:center; padding:40px 22px 60px; color:var(--dim); font-size:14px; border-top:1px solid var(--line); margin-top:20px;}
+  footer a{color:var(--green-d); text-decoration:none;}
+
+  /* dark mode page */
+  @media(prefers-color-scheme:dark){
+    :root{--ink:#e7e7ea; --dim:#9aa0aa; --line:#23252b; --card:#16181d; --bg:#0e0f12; --cream:#15201a;}
+    .btn-ghost{background:#16181d;}
+    .hero::before{background:
+      radial-gradient(60% 50% at 30% 20%, rgba(45,196,133,.18), transparent 70%),
+      radial-gradient(50% 50% at 80% 10%, rgba(24,160,90,.14), transparent 70%),
+      linear-gradient(180deg,#13201a,var(--bg) 70%); background-size:200% 200%;}
+  }
+
+  /* scroll reveal — only hide when JS is available, so no-JS still shows everything */
+  .js .reveal{opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease;}
+  .js .reveal.in{opacity:1; transform:none;}
+  @media(prefers-reduced-motion:reduce){
+    .js .reveal{opacity:1; transform:none; transition:none;}
+    .applogo,.phone,.hero::before{animation:none;}
+  }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Log Mc — Beta Tester Guide</h1>
-  <p class="meta">Thanks for helping test Log Mc 🚚</p>
-  <hr>
 
-  <p class="lead">Log Mc is a simple <strong>work &amp; rest assistant</strong> for
-  Australian heavy-vehicle drivers. In plain words it tells you: when you can start,
-  how long you can drive, what a break buys you, and where you stand for the week and
-  fortnight — measured against the NHVR fatigue rules.</p>
+  <!-- HERO -->
+  <header class="hero">
+    <span class="badge">Public Beta · For Aussie truck drivers</span><br>
+    <img class="applogo" src="icon.png" alt="Log Mc app icon">
+    <h1>Log&nbsp;Mc</h1>
+    <p class="tag">Your work &amp; rest, in plain words — when you can start, how long you can drive, and what a break buys you.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://testflight.apple.com/join/AcHAaD7c">Join the beta on TestFlight →</a>
+      <a class="btn btn-ghost" href="#how">How it works</a>
+    </div>
+    <p class="sub">Measured against the NHVR fatigue rules. A smart <strong>assistant</strong> — not a certified Electronic Work Diary.</p>
+  </header>
 
-  <div class="warn">
-    <strong>Please read:</strong> this is a <strong>test version (beta)</strong>, and
-    Log Mc is an <strong>assistant — not a certified Electronic Work Diary (EWD)</strong>.
-    Keep using your normal logbook. Don't rely on Log Mc for compliance yet — we're
-    testing the numbers and the screens with your help.
-  </div>
+  <!-- SCREENSHOTS -->
+  <section class="shots-section">
+    <div class="eyebrow reveal">See it in action</div>
+    <h2 class="reveal">Inside the app</h2>
+    <p class="lead reveal">Swipe through the real dashboard.</p>
+    <div class="gallery reveal">
+      <div class="frame"><img src="screenshots/shot-1.jpg" alt="Log Mc app screen" loading="lazy"></div>
+      <div class="frame"><img src="screenshots/shot-2.jpg" alt="Log Mc app screen" loading="lazy"></div>
+      <div class="frame"><img src="screenshots/shot-3.jpg" alt="Log Mc app screen" loading="lazy"></div>
+      <div class="frame"><img src="screenshots/shot-4.jpg" alt="Log Mc app screen" loading="lazy"></div>
+      <div class="frame"><img src="screenshots/shot-5.jpg" alt="Log Mc app screen" loading="lazy"></div>
+      <div class="frame"><img src="screenshots/shot-6.jpg" alt="Log Mc app screen" loading="lazy"></div>
+    </div>
+  </section>
 
-  <div class="cta-wrap">
-    <a class="cta" href="https://testflight.apple.com/join/AcHAaD7c">Join the beta on TestFlight →</a>
-    <p class="meta" style="margin-top: 8px;">Open this page on your iPhone, then tap the button.</p>
-  </div>
+  <!-- FEATURES -->
+  <section id="features" class="wrap">
+    <div class="eyebrow reveal">Why drivers like it</div>
+    <h2 class="reveal">One screen, the answers that matter</h2>
+    <p class="lead reveal">No spreadsheets, no guesswork — Log Mc reads the rules so you don't have to.</p>
+    <div class="grid">
+      <div class="feat reveal"><div class="ic">⏱️</div><h3>One timer that matters</h3><p>While you drive, a single countdown shows the tightest limit across every rule — and why.</p></div>
+      <div class="feat reveal"><div class="ic">☕</div><h3>What a break buys</h3><p>Resting? See exactly how much drive time 15, 30 or 60 minutes earns back.</p></div>
+      <div class="feat reveal"><div class="ic">🟢</div><h3>When can I start?</h3><p>Before a shift, a clear countdown to when your next shift can legally begin.</p></div>
+      <div class="feat reveal"><div class="ic">🔒</div><h3>Your data, your iCloud</h3><p>No ads, no trackers, no servers we can read. Your logbook stays yours.</p></div>
+    </div>
+  </section>
 
-  <h2>1. How to join (about 5 minutes)</h2>
-  <ol>
-    <li class="step">On your iPhone, install the free <b>TestFlight</b> app from the App Store.</li>
-    <li class="step">Tap <b>Join the beta on TestFlight</b> (the green button above) — or open this link on your iPhone: <a href="https://testflight.apple.com/join/AcHAaD7c">testflight.apple.com/join/AcHAaD7c</a></li>
-    <li class="step">Tap <b>Accept</b>, then <b>Install</b> Log Mc.</li>
-    <li class="step">Open <b>Log Mc</b>.</li>
-  </ol>
+  <!-- HOW TO JOIN -->
+  <section id="how" class="wrap">
+    <div class="eyebrow reveal">Get started in ~5 minutes</div>
+    <h2 class="reveal">Join the beta</h2>
+    <p class="lead reveal">Open this page on your iPhone, then follow along.</p>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><div><h3>Install TestFlight</h3><p>Get the free <span class="big">TestFlight</span> app from the App Store.</p></div></div>
+      <div class="step reveal"><div class="num">2</div><div><h3>Tap to join</h3><p>Open <a class="big" href="https://testflight.apple.com/join/AcHAaD7c">testflight.apple.com/join/AcHAaD7c</a> on your iPhone → <span class="big">Accept</span> → <span class="big">Install</span> Log Mc.</p></div></div>
+      <div class="step reveal"><div class="num">3</div><div><h3>Set up (30 seconds)</h3><p>Open Log Mc → <span class="big">Sign in with Apple</span> → pick the <span class="big">rule set you drive under</span> (Standard, BFM, WA…) → confirm your home state.</p></div></div>
+      <div class="step reveal"><div class="num">4</div><div><h3>Use it on your shift</h3><p><span class="big">Start Shift</span> when you begin, tap to rest on breaks, and use the <span class="big">lock button</span> for a big live timer while you drive.</p></div></div>
+    </div>
+  </section>
 
-  <h2>2. First time you open it</h2>
-  <ol>
-    <li>Tap <b>Sign in with Apple</b> (you can choose “Hide My Email” — that's fine).</li>
-    <li>Pick the <b>fatigue rule set you actually drive under</b> (e.g. Standard Hours · Solo, BFM, WA…).</li>
-    <li>Confirm your <b>home base state</b> (it may fill in from your location — you can change it).</li>
-    <li>That's it — you're set up.</li>
-  </ol>
+  <!-- CAVEAT -->
+  <section class="wrap">
+    <div class="warn reveal">
+      <strong>Please remember:</strong> this is a <strong>test version</strong>, and Log Mc is an <strong>assistant — not a certified Electronic Work Diary (EWD)</strong>. Keep using your normal logbook; don't rely on Log Mc for compliance yet. We're testing the numbers and screens with your help.
+    </div>
+  </section>
 
-  <h2>3. Using it day to day</h2>
-  <ul>
-    <li><strong>Before a shift</strong> — the “Before you start” card shows when you can
-        start, how long you can work, your next breaks, and work left this week/fortnight.</li>
-    <li><strong>Start work</strong> — tap <b>Start Shift</b> when you begin.</li>
-    <li><strong>Taking a break</strong> — tap to go on rest; it shows how much drive time
-        15 / 30 / 60 minutes earns back.</li>
-    <li><strong>End of shift</strong> — tap <b>End Shift</b>, then review and tidy the
-        timeline if anything's off.</li>
-    <li><strong>Driving</strong> — tap the <b>lock</b> button for a big live timer
-        (drive time left while working, rest progress while stopped).</li>
-  </ul>
+  <!-- FEEDBACK -->
+  <section class="wrap">
+    <div class="eyebrow reveal">We're listening</div>
+    <h2 class="reveal">Found something off? Tell us</h2>
+    <p class="lead reveal">A number that doesn't add up, a confusing screen, a crash — the most useful report is a <strong>screenshot + one line</strong>.</p>
+    <div class="cardbox reveal">
+      <ul>
+        <li>Email <a href="mailto:sukhdeepsingh9084@gmail.com" style="color:var(--green-d);font-weight:600;">sukhdeepsingh9084@gmail.com</a></li>
+        <li>In <strong>TestFlight</strong> → <strong>Send Beta Feedback</strong></li>
+        <li>Or screenshot inside the app and share it</li>
+      </ul>
+      <p style="margin-top:10px; color:var(--dim); font-size:14px;">Tell us your iPhone model + iOS version if you hit a problem. Your logbook stays in your own iCloud — see the <a href="privacy.html" style="color:var(--green-d);">Privacy Policy</a>.</p>
+    </div>
+    <div class="cta-row" style="margin-top:30px;">
+      <a class="btn btn-primary" href="https://testflight.apple.com/join/AcHAaD7c">Join the beta on TestFlight →</a>
+    </div>
+  </section>
 
-  <h2>4. What we'd love your feedback on</h2>
-  <p>Anything that's <strong>confusing or wrong</strong> — a number that doesn't add up,
-  a screen that's unclear, or a crash. The most useful report is a
-  <strong>screenshot + one line</strong> of what you were doing.</p>
-  <div class="card">
-    <strong>Send feedback:</strong>
-    <ul>
-      <li>Email <a href="mailto:sukhdeepsingh9084@gmail.com">sukhdeepsingh9084@gmail.com</a>, or</li>
-      <li>In <b>TestFlight</b> → <b>Send Beta Feedback</b>, or</li>
-      <li>Take a screenshot inside the app and share it.</li>
-    </ul>
-    Tell us your iPhone model + iOS version if you hit a problem.
-  </div>
+  <footer>
+    <p>Log Mc · a work &amp; rest assistant for Australian heavy-vehicle drivers</p>
+    <p style="margin-top:8px;">
+      <a href="privacy.html">Privacy</a> &nbsp;·&nbsp;
+      <a href="support.html">Support</a> &nbsp;·&nbsp;
+      <a href="mailto:sukhdeepsingh9084@gmail.com">Contact</a>
+    </p>
+  </footer>
 
-  <h2>5. Your privacy</h2>
-  <p>Your logbook stays in <strong>your own iCloud</strong>. No ads, no trackers,
-  nothing sold — see the <a href="privacy.html">Privacy Policy</a>.</p>
-
-  <hr>
-  <p class="meta">
-    <a href="support.html">Support</a> &nbsp;&middot;&nbsp;
-    <a href="privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
-    <a href="mailto:sukhdeepsingh9084@gmail.com">Contact</a>
-  </p>
-</div>
+  <script>
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:0.12});
+    document.querySelectorAll('.reveal').forEach((el,i)=>{
+      el.style.transitionDelay = (Math.min(i,6)*0.05)+'s';
+      io.observe(el);
+    });
+  </script>
 </body>
 </html>
